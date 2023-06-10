@@ -1,0 +1,212 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://unpkg.com/open-props">
+  <link rel="stylesheet" href="https://unpkg.com/open-props/normalize.min.css"> 
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@200&display=swap');
+    * {
+      letter-spacing: 2px;
+      font-weight: 100;
+    }
+
+    body{
+      background: linear-gradient(90deg, rgba(5,5,80,1) 6%, rgba(149,110,156,1) 100%);
+    } 
+
+    .header-links{
+      text-decoration: none;
+      color: white;
+      font-size: 4vh;
+    }
+    .logo {
+      cursor: pointer;
+      width: 90%;
+      margin-left: 2vw;
+    }
+    .account-logo{
+      width: auto;
+      height: auto;
+    }
+    .header-items{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    p{
+      color: white;
+    }
+
+    .scroller-element {               /*picture*/
+      inline-size: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      border-radius: 3vh;
+      height: 20vh;
+    }
+
+    .media-scroller {                   /*grid container*/
+      padding-top: 3vh;
+      margin-bottom: 6vh;
+      display: grid;
+      gap: 0.5vw;               /*space between cards*/
+      grid-auto-flow: column;
+                /*% of cards showing without scrolling*/
+      padding: var(--size-3) var(--size-3); /*padding top left and bottom*/
+      /*background: #19195e; */
+      overflow-x: auto;
+      overscroll-behavior-inline: contain;
+    }
+
+    .media-element {                    /*grid item*/
+      display: grid;
+      border-radius: 2vh;
+      gap: var(--size-1) ;                /*padding between img and title*/
+      padding: var(--size-1);
+      /*background: var(--surface-2);       /*seraja hujnia vokrug card*/
+      /*border-radius: var(--radius-2);     /*zakruglenie seroj hujni vokrug card*/
+      box-shadow: var(--shadow-2);
+      transition: all 0.2s ease-in-out;
+    }
+    .scroller-title{
+      font-size: 1.5vh;
+    }
+
+    /*.media-element:hover {
+      transform: scale(1.1);
+    } */
+
+    .snaps-inline {
+      scroll-snap-type: inline mandatory;
+      scroll-padding-inline: var(--size-2);   /*padding from the left added*/
+      scroll-snap-align: start;               /* first card cant be shown partially *grif-auto-columns*/
+    }
+
+    .title-container{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .title {
+      text-align: center;
+      font-size: 2.5vh;
+    } 
+
+    ::-webkit-scrollbar {                       /* место для езды ползунка */
+      height: 4px;
+      width: 6px;
+      background: #073678;
+    }
+
+    ::-webkit-scrollbar-thumb:vertical {        /* ползунок */
+      background: #7104de;
+    }
+
+    ::-webkit-scrollbar:horizontal {                       /* место для езды ползунка */
+      height: 4px;
+      width: 4px;
+      background: #073678;
+      display: none;
+    }
+
+    ::-webkit-scrollbar-thumb:horizontal {
+      background: #7104de;
+      border-radius: 10px;
+      display: none;
+    }
+    .card{
+      background: none;
+      border-radius: 2vh;
+      height: 40vh;
+      box-shadow: var(--shadow-2);
+      transition: all 0.2s ease-in-out;
+
+    }
+    .card-img{
+      object-fit: cover;
+      border-radius: 2vh;
+      height: 35vh;
+    }
+    .card:hover{
+      transform: scale(1.1);
+    }
+    .card-title{
+      text-align: center;
+      font-size: 2vh;
+    }
+
+    .footer{
+      background: gray;
+      height: 10vh;
+      background: black;
+    }
+
+    .by{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .authors{
+      letter-spacing: 4px;
+    }
+
+    </style>
+    <title>Main_page</title>
+  </head>
+  <body>
+     <div class="container-fluid pt-5">
+      <div class="row header">
+        <div class="col-sm">
+          <img class="logo" src="{%static 'images/BiletX.svg'%}" alt="logo">
+        </div>
+        <div class="col-sm header-items">
+          <a class="header-links searchbar" href="#">Search</a>
+        </div>
+        <div class="col-sm header-items">
+          <a class="header-links" href="#">Account</a>
+          <img class="account-logo" src="{%static 'images/vector.svg'%}" alt="acc-logo">
+        </div>
+      </div>
+     </div>
+      <div class="container mt-5 title-container">
+        <p class="title">POPULAR EVENTS</p>
+      </div>
+     <div class="container-fluid media-scroller snaps-inline">
+      <div class="media-element">
+        <img class="scroller-element" src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80">
+        <p class="scroller-title">Example of event</p>
+      </div>
+    </div>
+    <div class="container mb-3 title-container">
+      <p class="title">TOP EVENTS</p>
+    </div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm mb-3">
+          <div class="card">
+            <a href="#"><img class="card-img" src="https://images.unsplash.com/photo-1582192903020-8a5e59dcdcf2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" alt="event-preview"></a>
+            <p class="card-title">Example of event</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid mt-5 footer">
+      <div class="row">
+        <div class="by mt-3">
+          <p class="author">
+            Ryhor Hapkala 218524
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
