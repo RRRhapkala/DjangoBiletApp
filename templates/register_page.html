@@ -106,11 +106,17 @@
       </style>
 </head>
 <body>
+  {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
   <div class="box">
     <div class="container">
       <div class="top-header">
-        <span>Have an account?</span>
-        <header>Login</header>
+        <header>Register</header>
       </div>
       <form method="POST" action="">
         {% csrf_token %}
@@ -128,11 +134,7 @@
         <input type="submit" class="submit" value="Login">
       </div>
       </form>
-      <div class="bottom">
-        <div class="right">
-          <a class="que" href="#">Don't have an account?</a>
-        </div>
-      </div>
+
     </div>
   </div>
 </body>
