@@ -4,14 +4,12 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-  <title>loginPage</title>
+  <title>Registration_page</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@200&display=swap');
     * {
       font-family: 'Outfit', sans-serif;
       font-weight: 100;
-      
     }
     body {
       background: linear-gradient(90deg, rgba(5,5,80,1) 6%, rgba(149,110,156,1) 100%);
@@ -25,7 +23,6 @@
       text-align: center;
     }
     .box {
-      margin-top: 20vh;
       width: 100%
     }
 
@@ -60,12 +57,6 @@
       background: none;
     }
 
-    i {
-      align-items: center;
-      color: #fff;
-      width: auto;
-      margin: auto;
-    }
 
     ::-webkit-input-placeholder{
       color: #fff;
@@ -80,7 +71,7 @@
       width: 100%;
       height: 4vh;
       outline: none;
-      background: rgba(255, 255, 255, 0.8);
+      background: rgba(77, 34, 155, 0.8);
       cursor: pointer;
       transition: 0.3s;
     }
@@ -102,8 +93,7 @@
       color: white;
       text-decoration: none;
     }
-  
-      </style>
+  </style>
 </head>
 <body>
   {% if messages %}
@@ -116,25 +106,29 @@
   <div class="box">
     <div class="container">
       <div class="top-header">
+        <span>Don't have an account?</span>
         <header>Register</header>
       </div>
       <form method="POST" action="">
         {% csrf_token %}
-      <div class="input-field">
-        <input type="text" class="input" name="username" placeholder="Username" required>
-        <i class="bx bx-user"></i>
-      </div>
+        <div class="input-field">
+          <input type="text" class="input" name="username" placeholder="Username" required>
+        </div>
 
-      <div class="input-field">
-        <input type="password" class="input" name="password" placeholder="Password" required>
-        <i class="bx bx-lock-alt"></i>
-      </div>
+        <div class="input-field">
+         <input type="password" class="input" name="password" placeholder="Password" required>
+        </div>
 
-      <div class="input-button">
-        <input type="submit" class="submit" value="Login">
-      </div>
+        <div class="input-button">
+         <input type="submit" class="submit" value="Register">
+        </div>
+      
+        <div class="bottom">
+          <div class="right">
+            <a class="que" href="{% url 'login' %}">Already got an account?</a>
+          </div>
+        </div>
       </form>
-
     </div>
   </div>
 </body>

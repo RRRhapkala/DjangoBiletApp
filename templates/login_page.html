@@ -2,10 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-  <title>loginPage</title>
+  <title>Document</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@200&display=swap');
     * {
@@ -25,8 +23,7 @@
       text-align: center;
     }
     .box {
-      margin-top: 20vh;
-      width: 100%
+      width: 100%;;
     }
 
     span {
@@ -60,12 +57,6 @@
       background: none;
     }
 
-    i {
-      align-items: center;
-      color: #fff;
-      width: auto;
-      margin: auto;
-    }
 
     ::-webkit-input-placeholder{
       color: #fff;
@@ -80,7 +71,7 @@
       width: 100%;
       height: 4vh;
       outline: none;
-      background: rgba(255, 255, 255, 0.8);
+      background: rgba(77, 34, 155, 0.8);
       cursor: pointer;
       transition: 0.3s;
     }
@@ -102,10 +93,16 @@
       color: white;
       text-decoration: none;
     }
-  
-      </style>
+  </style>
 </head>
 <body>
+  {% if messages %}
+  <ul class="messages">
+      {% for message in messages %}
+      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+      {% endfor %}
+  </ul>
+  {% endif %}
   <div class="box">
     <div class="container">
       <div class="top-header">
@@ -116,24 +113,28 @@
         {% csrf_token %}
       <div class="input-field">
         <input type="text" class="input" name="username" placeholder="Username" required>
-        <i class="bx bx-user"></i>
       </div>
 
       <div class="input-field">
         <input type="password" class="input" name="password" placeholder="Password" required>
-        <i class="bx bx-lock-alt"></i>
       </div>
 
       <div class="input-button">
         <input type="submit" class="submit" value="Login">
       </div>
-      </form>
+
       <div class="bottom">
         <div class="right">
-          <a class="que" href="#">Don't have an account?</a>
+          <a class="que" href="{% url 'register' %}">Don't have an account?</a>
         </div>
       </div>
+
+      <div class="input-button">
+        <button>Login with Google</button>
+      </div>
+    </form>
     </div>
   </div>
 </body>
 </html>
+
