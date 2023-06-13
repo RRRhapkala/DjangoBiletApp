@@ -16,6 +16,13 @@ def addevent_page(request):
             return redirect('main')
     
     return render(request, 'addevent_page.html', context)
+
+def event_page(request, id):
+    event = Event.objects.get(id = id)
+    context = {
+        "event": event
+    }
+    return render(request, "event_page.html", context)
     
 
 def register_page(request):

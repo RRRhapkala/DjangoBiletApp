@@ -1,0 +1,48 @@
+{% load static %}
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@200&display=swap');
+    @import url("https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css");
+    * {
+      letter-spacing: 2px;
+      font-weight: 100;
+    }
+
+    body{
+      background: linear-gradient(90deg, rgba(5,5,80,1) 6%, rgba(149,110,156,1) 100%);
+    } 
+
+    .header-links{
+      text-decoration: none;
+      color: white;
+      font-size: 4vh;
+    }
+    .logo {
+      cursor: pointer;
+      width: 90%;
+      margin-left: 2vw;
+    }
+    .account-logo{
+      width: auto;
+      height: auto;
+    }
+    .header-items{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .bx{
+      color: #eeaef8;
+    }
+
+  </style>  
+  <div class="container-fluid pt-5">
+    <div class="row header">
+      <div class="col-lg-6 text-start">
+        <a href="{% url 'main' %}"><img class="logo" src="{%static 'images/BiletX.svg'%}" alt="logo"></a>
+      </div>
+      <div class="col-lg-6 header-items">
+        <a class="header-links" id="account-link" href="{% if request.user.is_authenticated %} {% url 'profile' %} {% else %} {% url 'login' %} {% endif %}" > {% if request.user.is_authenticated %} {{ request.user.username }} {% else %} login {% endif %}</a>
+        <i class='bx bxs-user-account bx-flashing bx-md'></i>
+      </div>
+    </div>
+  </div>
