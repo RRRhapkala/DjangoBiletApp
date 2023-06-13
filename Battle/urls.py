@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', main_page, name='main'),
     path('login/', login_page, name='login'),
-    path('register/', register_page, name='register')
-    
+    path('register/', register_page, name='register'),
+    path('event/<int:id>', register_page, name='event'),
+    path('add_event/', addevent_page, name='add_event')
 ]

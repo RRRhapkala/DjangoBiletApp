@@ -6,7 +6,17 @@ from django.contrib import messages
 
 def main_page(request):
     print(request.user.username)
-    return render(request, 'main_page.html', {})
+    context = {"events": get_events()}
+    return render(request, 'main_page.html', context)
+
+def addevent_page(request):
+    context = {}
+    if request.method == 'POST':
+            add_event(request)
+            return redirect('main')
+    
+    return render(request, 'addevent_page.html', context)
+    
 
 def register_page(request):
     if request.method == 'POST':
