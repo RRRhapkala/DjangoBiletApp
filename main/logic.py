@@ -5,6 +5,7 @@ from django.shortcuts import redirect
 from main.exceptions import *
 from main.models import Event
 from main.forms import EventForm
+import datetime
 #logic of the website
 # def get_event, def get_profile, def add_event, def book_event, def cancel_event
 def register_user(request):
@@ -39,3 +40,25 @@ def add_event(request):
         event_form.save()
     else:
         raise InvalidEventForm(event_form.errors)
+    
+
+def get_events_for_user(request):
+    events = Event.objects.filter(users__in = [request.user])
+    future_events = events.filter(date__gte = datetime.datetime.now())
+    past_events = events.filter(date__lt = datetime.datetime.now())
+    return {
+            "futureEvents": future_events,
+            "pastEvents": past_events
+            }
+
+def submit_reservation(request):
+    event_id = request.POST.get("event_id")
+    event = Event.objects.get(id=event_id)
+    event.users.add(request.user)
+    event.save()
+
+def cancel_reservation(request):
+    event_id = request.POST.get("event_id")
+    event = Event.objects.get(id=event_id)
+    event.users.remove(request.user)
+    event.save()

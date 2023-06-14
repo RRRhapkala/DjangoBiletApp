@@ -78,6 +78,7 @@
             max-width: 400px;
             border-radius: 7px;
             margin: 10px 4px 0 4px;
+            background-color: black;
         }
         .authors{
             padding: 4px;
@@ -91,7 +92,6 @@
           transition: transform 1000s;
         }
         .footer{
-          background: gray;
           height: 10vh;
           background: black;
         }
@@ -118,7 +118,24 @@
         <div class="map" id="mapContainer">
 
         </div>
+        {% if request.user.is_authenticated %}
+        <form method="POST" action="">
+            {% csrf_token %}
+            <input name="event_id" value="{{ event.id }}" hidden>
+            <input type="submit" name="action" class="btn-lg add-reservaion-button" value="Submit reservation">
+        </form>
+        {% endif %}
     </div>
+    <div class="container-fluid mt-5 footer">
+        <div class="row">
+            <p class="authors">
+              Ryhor Hapkala 218524
+            </p>
+            <p class="authors">
+              Yahor&nbsp;Lashko&nbsp;&nbsp;219145
+            </p>
+        </div>
+      </div>
     <script>
         const mapDiv = document.getElementById("mapContainer");
         const map = L.map(mapDiv);

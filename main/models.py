@@ -12,8 +12,4 @@ class Event(models.Model):
     lon = models.FloatField()
     lat = models.FloatField()
     category = models.CharField(max_length = 8)
-
-class Ticket(models.Model):
-    event = models.ForeignKey(to = Event, on_delete = models.CASCADE)
-    user = models.ForeignKey(to = User, on_delete = models.CASCADE)
-    
+    users = models.ManyToManyField(User)

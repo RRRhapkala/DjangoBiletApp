@@ -2,6 +2,7 @@ from django.shortcuts import render
 from main.exceptions import *
 from main.logic import *
 from django.contrib import messages
+from django.contrib.auth import logout
 # Create your views here.
 
 def main_page(request):
@@ -22,6 +23,8 @@ def event_page(request, id):
     context = {
         "event": event
     }
+    if request.method == "POST":
+        submit_reservation(request)
     return render(request, "event_page.html", context)
     
 
@@ -44,4 +47,14 @@ def login_page(request):
             messages.error(request, e)
             return redirect('main')
     return render(request, 'login_page.html', {})
-        
+
+def profile_page(request):
+    context = get_events_for_user(request)
+    if request.method == 'POST':
+        if request.POST.get("action") == "Cancel":
+            cancel_reservation(request)
+            return redirect("profile")
+        elif request.POST.get("action") == "Signout":
+            logout(request)
+            return redirect('login')
+    return render(request, 'profile_page.html', context)
