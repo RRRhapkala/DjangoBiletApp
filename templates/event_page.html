@@ -73,13 +73,28 @@
             width: 100%;
             aspect-ratio: 4/3;
         }
-        .add-reservaion-button {
-            width: 100%;
-            max-width: 400px;
-            border-radius: 7px;
-            margin: 10px 4px 0 4px;
-            background-color: black;
+        .sbm-but {
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
+        .submit {
+            margin-top: 3vh;
+            border: none;
+            border-radius: 3vh;
+            font-size: 2.5vh;
+            width: 30%;
+            height: 6vh;
+            outline: none;
+            background: rgba(38, 13, 84, 0.8);
+            cursor: pointer;
+            transition: 0.3s ease-in;
+          }
+      
+          .submit:hover{
+            box-shadow: 1px 5px 7px 1px rgba(0, 0, 0, 0.3);
+            border: 1px solid #0d53b6 !important;
+          }
         .authors{
             padding: 4px;
             margin: 0;
@@ -92,9 +107,34 @@
           transition: transform 1000s;
         }
         .footer{
-          height: 10vh;
-          background: black;
-        }
+            height: 8vh;
+            background: black;
+            text-align: center;
+            margin-top: 9vh;
+          }
+          ::-webkit-scrollbar {   
+            height: 4px;
+            width: 6px;
+            background: #073678;
+          }
+      
+          ::-webkit-scrollbar-thumb:vertical { 
+            background: #7104de;
+          }
+      
+          ::-webkit-scrollbar:horizontal {   
+            height: 4px;
+            width: 4px;
+            background: #073678;
+            display: none;
+          }
+      
+          ::-webkit-scrollbar-thumb:horizontal {
+            background: #7104de;
+            border-radius: 10px;
+            display: none;
+          }
+
     </style>
 </head>
 <body>
@@ -122,17 +162,16 @@
         <form method="POST" action="">
             {% csrf_token %}
             <input name="event_id" value="{{ event.id }}" hidden>
-            <input type="submit" name="action" class="btn-lg add-reservaion-button" value="Submit reservation">
+            <div class="sbm-but">
+                <input type="submit" name="action" class="submit" value="Submit reservation">
+            </div>
         </form>
         {% endif %}
     </div>
-    <div class="container-fluid mt-5 footer">
-        <div class="row">
+    <div class="container-fluid footer ">
+        <div class="row footer">
             <p class="authors">
-              Ryhor Hapkala 218524
-            </p>
-            <p class="authors">
-              Yahor&nbsp;Lashko&nbsp;&nbsp;219145
+              by RYHOR HAPKALA
             </p>
         </div>
       </div>
