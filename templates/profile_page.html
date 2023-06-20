@@ -10,12 +10,12 @@
   <title>Document</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@200&display=swap');
-    @import url('https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css');
-
+    @import url("https://unpkg.com/open-props");
     * {
-      font-family: 'Outfit', sans-serif;
-      font-weight: 100;  
+      letter-spacing: 2px;
+      font-weight: 100;
     }
+
     body{
       background: linear-gradient(90deg, rgba(5,5,80,1) 6%, rgba(149,110,156,1) 100%);
     } 
@@ -23,7 +23,6 @@
     .header-links{
       text-decoration: none;
       color: white;
-      font-size: 4vh;
     }
     .logo {
       cursor: pointer;
@@ -42,165 +41,159 @@
     p{
       color: white;
     }
-    .preview {
-      width: auto;
-      max-width: 100%;
-      min-width: 20vw;
-      aspect-ratio: 16/9;
+
+    .scroller-element {
+      aspect-ratio: 16 / 9;
       object-fit: cover;
       border-radius: 3vh;
-      border: 0.1vh solid #eeaef8;
+      height: 20vh;
     }
 
-    .buttons-container {
-      align-items: center;
-      justify-content: center;
+    .media-scroller {
+      padding-top: 3vh;
+      margin-bottom: 6vh;
+      display: grid;
+      gap: 0.5vw;
+      grid-auto-flow: column;
+      padding: var(--size-3) var(--size-3); 
+      overflow-x: auto;
+      overscroll-behavior-inline: contain;
     }
 
-    .buttons-container > * {
-      margin: 3px;
+    .media-element {                    
+      display: grid;
+      width: auto;
+      border-radius: 2vh;
+      gap: var(--size-1) ;   
+      padding: var(--size-1);
+      box-shadow: var(--shadow-2);
+      transition: all 0.2s ease-in-out;
+      text-align: center;
+    }
+    .scroller-title{
+      font-size: 1.5vh;
     }
 
-    .event-name, .event-price, .event-date {
-      font-size: min(3vh, 6vw);
+    .media-element:hover {
+      transform: scale(1.05);
     }
 
-    .submit {
-      margin-top: 3vh;
-      border: none;
-      border-radius: 3vh;
-      font-size: 2.5vh;
-      height: 6vh;
-      outline: none;
-      background: rgba(38, 13, 84, 0.8);
-      cursor: pointer;
-      transition: 0.3s ease-in;
-      color: white;
-    }
-    
-    .sgn{
-      width: 10vw;
+    .snaps-inline {
+      scroll-snap-type: inline mandatory;
+      scroll-padding-inline: var(--size-2);
+      scroll-snap-align: start;
     }
 
-    .add{
-      width: 10vw;
-    }
-
-    .submit:hover{
-      box-shadow: 1px 5px 7px 1px rgba(0, 0, 0, 0.3);
-      border: 1px solid #0d53b6 !important;
-    }
-
-    .event-info{
+    .title-container{
       display: flex;
       justify-content: center;
       align-items: center;
     }
-    .bx {
-      margin-bottom: 2vh;
-    }
-    .bx-active{
-      color: #eeaef8;
-    }
-    .bx-unactive{
-      color: red;
+
+    .title {
+      text-align: center;
+      font-size: 2.5vh;
+    } 
+
+    ::-webkit-scrollbar {   
+      height: 4px;
+      width: 6px;
+      background: #073678;
     }
 
-    .title-container{
+    ::-webkit-scrollbar-thumb:vertical { 
+      background: #7104de;
+    }
+
+    ::-webkit-scrollbar:horizontal {   
+      height: 4px;
+      width: 4px;
+      background: #073678;
+      display: none;
+    }
+
+    ::-webkit-scrollbar-thumb:horizontal {
+      background: #7104de;
+      border-radius: 10px;
+      display: none;
+    }
+    .card{
+      background: none;
+      border-radius: 2vh;
+      padding: 2vh 2vh 0.5vh 2vh;
+      height: auto;
+      box-shadow: var(--shadow-2);
+      transition: all 0.2s ease-in-out;
+    }
+    .card-img{
+      object-fit: cover;
+      border-radius: 2vh;
+      height: 35vh;
+    }
+    .card:hover{
+      transform: scale(1.05);
+      transform: rotateZ(1deg);
+    }
+    .card-title{
       text-align: center;
-      width: 100%;
-      margin: 2vh 0 2vh 0;
+      font-size: 2vh;
     }
-    .page-title{
-      color: white;
-      font-size: min(4vh, 7vw);
-      text-shadow: 0px 3px 11px black;
-      width: fit-content;
-      margin: 0 auto 0 auto;
+
+    .footer{
+      height: 8vh;
+      background: black;
+      text-align: center;
     }
-    .active {
-      background: rgba(18, 18, 201, 0.3);
-      border-radius: 3vh;
+
+    .authors{
+        padding: 4px;
+        margin: 0;
+        letter-spacing: 4px;
+        width: 100%;
     }
-    .unactive {
-      background: rgba(99, 99, 99, 0.5);
-      border-radius: 3vh;
+
+    .authors:hover {
+      transform: rotateY(1000000deg);
+      transition: transform 1000s;
     }
+
+    
   </style>
 </head>
-  <body>
-    <h2 class="page-title">Hello, {{ request.user.username }}</h2>
-
-    <div class="d-flex buttons-container">
-    <form method="POST" action="">
-        {% csrf_token %}
-      <input type="submit" name="action" class="submit sgn" value="Signout">
-    </form>
-
-      <a href="{% url 'add_event' %}"><button class="submit add">Add new event</button></a>
-    </div>
-
-   <div class="title-container">
-    <p class="page-title">Active tickets</p>
+<body>
+  {% include "header.html" %}
+  <div class="container mt-5 title-container">
+    <p class="title">POPULAR EVENTS</p>
   </div>
-
-  {% for event_ in futureEvents %}
-   <div class="container-fluid mt-5">
-    <div class="ticket active">
-      <div class="row">
-        <div class="col-sm event-info" >
-          <a href="{% url 'event' event_.id %}"><img class="preview" src="{{event_.preview_image}}"></a>
-        </div>
-        <div class="col event-info" >
-          <p class="event-name">{{ event_.name }}</p>
-        </div>
-        <div class="col event-info">
-          <p class="event-price">{{ event_.price }} zł</p>
-        </div>
-        <div class="col event-info">
-          <p class="event-date">{{ event_.date }}</p>
-          <i class="bx bx-active bx-time bx-md"></i>
-        </div>
-        <div class="col event-info">
-          <form method="POST" action="">
-            {% csrf_token %}
-            <input name="event_id" value="{{ event_.id }}" hidden>
-            <input type="submit" name="action" class="submit sgn" value="Cancel">
-          </form>
-        </div>
+ <div class="container-fluid media-scroller snaps-inline">
+  {% for event_ in events.popular %} 
+  <div class="media-element">
+    <a href="{% url 'event' event_.id %}"><img class="scroller-element" src= "{{event_.preview_image}}"></a>
+    <p class="scroller-title">{{ event_.name }} - {{ event_.price }} zł</p>
+  </div> 
+  {% endfor %}
+</div>
+<div class="container mb-3 title-container">
+  <p class="title">TOP EVENTS</p>
+</div>
+<div class="container-fluid">
+  <div class="row">
+    {% for event_ in events.top %}
+    <div class="col-sm mb-3">
+      <div class="card">
+        <a href="{% url 'event' event_.id %}"><img class="card-img" src= "{{event_.preview_image}}" alt="event-preview"></a>
+        <p class="card-title">{{ event_.name }} - {{ event_.price }} zł</p>
       </div>
-    </div>
     </div>
     {% endfor %}
-
-  <div class="title-container">
-    <p class="page-title">History</p>
   </div>
-
-  {% for event_ in pastEvents %}
-    <div class="container-fluid mt-5" v-for="event_ in pastEvents">
-    <div class="ticket unactive">
-      <div class="row">
-        <div class="col-sm event-info" >
-          <a href="{% url 'event' event_.id %}"><img class="preview" src="{{event_.preview_image}}"></a>
-        </div>
-        <div class="col event-info" >
-          <p class="event-name">{{ event_.name }}</p>
-        </div>
-        <div class="col event-info">
-          <p class="event-price">{{ event_.price }} zł</p>
-        </div>
-        <div class="col event-info">
-          <p class="event-date">{{ event_.date }}</p>
-          <i class="bx bx-unactive bx-time bx-md"></i>
-        </div>
-      </div>
-    </div>
-    </div>
-  {% endfor %}
-
-  </body>
+</div>
+<div class="container-fluid footer mt-5 ">
+  <div class="row footer">
+      <p class="authors">
+        by RYHOR HAPKALA
+      </p>
+  </div>
+</div>
+</body>
 </html>
-    
-
-
