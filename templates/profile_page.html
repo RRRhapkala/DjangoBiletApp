@@ -65,6 +65,32 @@
       font-size: min(3vh, 6vw);
     }
 
+    .submit {
+      margin-top: 3vh;
+      border: none;
+      border-radius: 3vh;
+      font-size: 2.5vh;
+      height: 6vh;
+      outline: none;
+      background: rgba(38, 13, 84, 0.8);
+      cursor: pointer;
+      transition: 0.3s ease-in;
+      color: white;
+    }
+    
+    .sgn{
+      width: 10vw;
+    }
+
+    .add{
+      width: 10vw;
+    }
+
+    .submit:hover{
+      box-shadow: 1px 5px 7px 1px rgba(0, 0, 0, 0.3);
+      border: 1px solid #0d53b6 !important;
+    }
+
     .event-info{
       display: flex;
       justify-content: center;
@@ -108,10 +134,10 @@
     <div class="d-flex buttons-container">
     <form method="POST" action="">
         {% csrf_token %}
-      <input type="submit" name="action" value="Signout">
+      <input type="submit" name="action" class="submit sgn" value="Signout">
     </form>
 
-      <a href="{% url 'add_event' %}"><button>Add new event</button></a>
+      <a href="{% url 'add_event' %}"><button class="submit add">Add new event</button></a>
     </div>
 
    <div class="title-container">
@@ -139,7 +165,7 @@
           <form method="POST" action="">
             {% csrf_token %}
             <input name="event_id" value="{{ event_.id }}" hidden>
-            <input type="submit" name="action" class="btn-lg" value="Cancel">
+            <input type="submit" name="action" class="submit sgn" value="Cancel">
           </form>
         </div>
       </div>
@@ -176,4 +202,5 @@
   </body>
 </html>
     
+
 
